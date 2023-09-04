@@ -41,7 +41,7 @@
 
 
 
-# RESET 
+# git RESET 
 
 - commit 자체를 삭제해버리는 방식입니다. (혼자 branch 를 사용할 때 추천하는 방법입니다.)
 
@@ -49,7 +49,7 @@
 
 
 
-### 예제
+### 예제 1
 
 - Develop1.java 를 생성해서 commit and push 를 했습니다. (hash 1)
 - Develop2.java, Develop3.java 를 생성해서 commit and push 를 했습니다. (hash 2)
@@ -61,3 +61,14 @@
   - 이렇게 하면 HEAD 가 hash1을 가리킵니다.
 - Git push 0f origin [현재 branch]
   - 명령어를 수행한 이후 local, remote 에 있는 commit history hash2, hash3, hash4 가 삭제됩니다.
+
+
+
+### 예제 2
+
+- 로컬에서만 작업한 최근 커밋을 지우고 싶습니다.
+
+```bash
+git reset HEAD^  // 최근 1개 삭제 - push 까지 해야 반영됩니다.
+git reset HEAD^~3 // 최근 3개 삭제 - push 까지 해야 반영됩니다.
+```

@@ -36,7 +36,7 @@ ex) release/1.0.0
 
 ### lightweight
 
-- lightweight 의 경우 특정 커밋을 가르키는 기능입니다. 설명 등을 입력할 수 없습니다.
+- lightweight 의 경우 특정 커밋을 가리키는 기능입니다. 설명 등을 입력할 수 없습니다.
 
 ```bash
 git tag release/1.0.0    # 현재 최신 버전의 커밋번호로 태그를 만듭니다. remote push 까지 해야 remote 저장소에 생성됩니다.
@@ -74,7 +74,7 @@ git fetch origin tags/release1.0.0   # tags/release1.0.0 태그를 로컬로 가
 
 
 
-### 2. 태그를 fetch 한 이후, check 합니다.
+### 2. 태그를 fetch 한 이후, checkout 합니다.
 
 ```bash
 git checkout tags/release1.0.0    # tags/release1.0.0 를 checkout 합니다.
@@ -89,4 +89,6 @@ git checkout tags/release1.0.0 -b release/1.0.0		# tags/release1.0.0 태그를 �
 ```
 
 
+
+### 4. branch 를 remote 에 push 합니다.
 

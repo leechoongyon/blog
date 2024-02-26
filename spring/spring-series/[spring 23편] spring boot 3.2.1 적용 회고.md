@@ -29,3 +29,68 @@
 The version of Spring Framework used by Spring Boot 3.2 no longer attempts to deduce parameter names by parsing bytecode. If you experience issues with dependency injection or property binding, you should double check that you are compiling with the -parameters option. See this section of the "Upgrading to Spring Framework 6.x" wiki for more details.
 ```
 
+
+
+# Method Validation
+
+- Controller Method Parameter 에 `@Constraint` 가 선언돼있으면 Method Validation 동작합니다. (신규 기능)
+- Method Validation 동작하면서 기존 MethodArgumentNotValidException → HandlerMethodValidationException 발생합니다.
+- GlobalExceptionHandler 에서 HandlerMethodValidationException 추가해서 처리합니다.
+
+- 참고 : https://github.com/spring-projects/spring-framework/issues/31775
+
+
+
+### example source
+
+```java
+@RestController
+public class TestController {
+  	public ResponseEntity test(@Valid @RequestBody @ValidAccount ReqeustDto requestDto) {
+      ...
+      ...
+    }
+}
+
+
+// 예시로 작성한 것입니다. 문법이 틀릴수 있습니다.
+@Documented
+@Constraint
+@Target({ ElementType.METHOD, ElementType.FIELD })
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ValidAccount {
+    ...
+    ...
+    ...
+}
+
+
+
+```
+
+
+
+
+
+# MethodValidation index cannot find local variable
+
+- MethodValidation 이 동작하면서 custom validation 이 동작할 때, Property 를 접근 못하는 예외가 발생했습니다. 자세한 내용은 https://github.com/spring-projects/spring-framework/issues/31746 참고하면 됩니다.
+
+- 해결방안은 spring 6.1.3 을 적용하는 것인데, 글을 쓰는 지금 이 순간 spring boot 3.2.2 가 나와서 3.2.2 를 적용하면 해결될 것이라 생각됩니다. 
+
+- 참고 : https://github.com/spring-projects/spring-framework/issues/29043
+
+
+
+
+
+# Pageable.unpaged not serializable
+
+- 기존에 Pageable.unpaged 는 json 으로 serialize 가능했습니다. spring boot 3.2.1 버전이 나오면서 unpaged 가 json serialize 하지 않아서 에러가 발생합니다. PageRequest.of(0, 10) 방식으로 처리 가능합니다.
+- https://github.com/spring-projects/spring-data-commons/issues/2987
+
+
+
+# Reference
+
+- https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.2-Release-Notes

@@ -34,3 +34,26 @@ jcmd <pid> VM.native_memory detail.summary
 ```
 
 
+
+# 예시
+
+Total:  reserved=6000KB,  committed=30000KB                                           -- commited 는 현재 사용하는 메모리, reservered 는 사용 가능한 메모리
+
+-                 Java Heap (reserved=50000KB, committed=30000KB)                      -- Java Heap
+                            (mmap: reserved=xxxxxKB, committed=xxxxxKB)
+-                     Class (reserved=12345KB, committed=1321KB)                          -- 클래스 메타데이터
+                            (classes #123)                                               -- 로드된 클래스 개수 
+                            (malloc=111KB, #1200)                                        -- malloc 개수
+                            (mmap: reserved=3000KB, committed=1000KB)
+-                    Thread (reserved=2000KB, committed=1000KB)
+                            (thread #5)                                                 -- 스레드 개수
+                            (stack: reserved=6000KB, committed=5000KB)                   스레드 stack 메모리 사용량
+
+-                  Internal (reserved=123KB, committed=22KB).   -- native memory
+                   
+
+
+
+# 참고
+
+- https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr007.html
